@@ -29,7 +29,7 @@ export default function SharedModal({
   let filteredImages = images?.filter((img: ImageProps) =>
     range(index - 15, index + 15).includes(img.id),
   );
-  
+
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       if (index < images?.length - 1) {
@@ -43,7 +43,8 @@ export default function SharedModal({
     },
     trackMouse: true,
   });
-  let currentImage =  images[index].public_id ;
+
+  let currentImage = images[index].public_id;
 
   return (
     <MotionConfig
@@ -70,13 +71,11 @@ export default function SharedModal({
                 className="absolute"
               >
                 <Image
-                  src={`${
-                    currentImage
-                  }`}
+                  src={`${currentImage}`}
                   width={0}
                   height={0}
                   sizes="100vw"
-                  style={{ width: 'auto', height: 'auto' }} 
+                  style={{ width: "auto", height: "auto" }}
                   priority
                   alt="Next.js Conf image"
                   onLoad={() => setLoaded(true)}
@@ -92,43 +91,40 @@ export default function SharedModal({
           {loaded && (
             <div className="relative aspect-[3/2] max-h-full w-full">
               {navigation && (
-                <>
-                  {index > 0 && (
-                    <button
-                      className="absolute left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
-                      style={{ transform: "translate3d(0, 0, 0)" }}
-                      onClick={() => {changePhotoId(index - 1); }}
-                    >
-                      <ChevronLeftIcon className="h-6 w-6" />
-                    </button>
-                  )}
-                  {index + 1 < images.length && (
-                    <button
-                      className="absolute right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
-                      style={{ transform: "translate3d(0, 0, 0)" }}
-                      onClick={() => changePhotoId(index + 1)}
-                    >
-                      <ChevronRightIcon className="h-6 w-6" />
-                    </button>
-                  )}
-                </>
+                 <>
+                 {index > 0 && (
+                   <button
+                     className="absolute left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                     style={{ transform: "translate3d(0, 0, 0)" }}
+                     onClick={() => { changePhotoId(index - 1); }}
+                   >
+                     <ChevronLeftIcon className="h-6 w-6" />
+                   </button>
+                 )}
+                 {index + 1 < images.length && (
+                   <button
+                     className="absolute right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+                     style={{ transform: "translate3d(0, 0, 0)" }}
+                     onClick={() => { changePhotoId(index + 1); }}
+                   >
+                     <ChevronRightIcon className="h-6 w-6" />
+                   </button>
+                 )}
+               </>
               )}
               <div className="absolute top-0 right-0 flex items-center gap-2 p-3 text-white">
-                  <a
-                    href={`${currentImage}`}
-                    className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
-                    target="_blank"
-                    title="Open fullsize version"
-                    rel="noreferrer"
-                  >
-                    <ArrowTopRightOnSquareIcon className="h-5 w-5" />
-                  </a>
+                <a
+                  href={`${currentImage}`}
+                  className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                  target="_blank"
+                  title="Open fullsize version"
+                  rel="noreferrer"
+                >
+                  <ArrowTopRightOnSquareIcon className="h-5 w-5" />
+                </a>
                 <button
                   onClick={() =>
-                    downloadPhoto(
-                      `${currentImage}`,
-                      `${index}.jpg`,
-                    )
+                    downloadPhoto(`${currentImage}`, `${index}.jpg`)
                   }
                   className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
                   title="Download fullsize version"
@@ -158,7 +154,7 @@ export default function SharedModal({
                 className="mx-auto mt-6 mb-6 flex aspect-[3/2] h-14"
               >
                 <AnimatePresence initial={false}>
-                  {filteredImages.map(({ public_id,  id }) => (
+                  {filteredImages.map(({ public_id, id }) => (
                     <motion.button
                       initial={{
                         width: "0%",

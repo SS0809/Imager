@@ -17,17 +17,30 @@ export default function Carousel({
   const router = useRouter();
   const [, setLastViewedPhoto] = useLastViewedPhoto();
 
+
   function closeModal() {
     setLastViewedPhoto(currentPhoto.id);
-    router.push("/", undefined, { shallow: true });
+    //router.push("/", undefined, { shallow: true });
+        window.location.href = '/';
   }
 
+
+
   function changePhotoId(newVal: number) {
-    return newVal;
+      window.location.href = `${newVal}`;
+   // return newVal;
   }
 
   useKeypress("Escape", () => {
     closeModal();
+  });
+  useKeypress("ArrowLeft", () => {
+    if(index > 0)
+    changePhotoId(index - 1);
+  });
+  useKeypress("ArrowRight", () => {
+    if(index + 1 < images.length)
+    changePhotoId(index + 1);
   });
 
   return (

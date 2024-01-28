@@ -55,10 +55,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const currentPhoto = reducedResults.find(
     (img) => img.id === Number(context.params.photoId),
   );
-console.log('photoid'+  {  props: {
-  currentPhoto: currentPhoto,
-  paths: transformedData,
-}})
   return {
     props: {
       currentPhoto: currentPhoto,
