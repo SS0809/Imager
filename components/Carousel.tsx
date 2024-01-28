@@ -4,6 +4,7 @@ import useKeypress from "react-use-keypress";
 import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
 import SharedModal from "./SharedModal";
+import { useRef, useState } from "react";
 
 export default function Carousel({
   index,
@@ -18,17 +19,28 @@ export default function Carousel({
   const [, setLastViewedPhoto] = useLastViewedPhoto();
 
 
+  const [direction, setDirection] = useState(0);
+  const [curIndex, setCurIndex] = useState(index);
+
   function closeModal() {
-    setLastViewedPhoto(currentPhoto.id);
-    //router.push("/", undefined, { shallow: true });
-        window.location.href = '/';
+    router.push("/", undefined, { shallow: true });
+    window.location.href = "/";
   }
 
-
-
   function changePhotoId(newVal: number) {
-      window.location.href = `${newVal}`;
-   // return newVal;
+    if (newVal > index) {
+      setDirection(1);
+    } else {
+      setDirection(-1);
+    }
+    setCurIndex(newVal);
+    router.push(
+      {
+        query: { photoId: newVal },
+      },
+      `/p/${newVal}`,
+      { shallow: true },
+    );
   }
 
   useKeypress("Escape", () => {
